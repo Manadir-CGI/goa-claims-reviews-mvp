@@ -1,0 +1,63 @@
+/* ============================================================
+   Base resets & document defaults for GoA surfaces.
+   Mirrors the GoA reset: neutral page, Acumin body type,
+   blue interactive links, sensible heading scale.
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font: var(--goa-typography-body-m);
+  color: var(--goa-color-text-default);
+  background-color: var(--goa-color-greyscale-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings use the GoA heading scale */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  color: var(--goa-color-text-default);
+  font-family: var(--goa-font-family-sans);
+}
+h1 { font: var(--goa-typography-heading-xl); letter-spacing: var(--goa-letter-spacing-xl); }
+h2 { font: var(--goa-typography-heading-l);  letter-spacing: var(--goa-letter-spacing-l); }
+h3 { font: var(--goa-typography-heading-m);  letter-spacing: var(--goa-letter-spacing-m); }
+h4 { font: var(--goa-typography-heading-s); }
+h5 { font: var(--goa-typography-heading-xs); }
+h6 { font: var(--goa-typography-heading-2xs); }
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--goa-color-interactive-default);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+a:hover {
+  color: var(--goa-color-interactive-hover);
+}
+a:visited {
+  color: var(--goa-color-interactive-visited);
+}
+
+code, pre, kbd, samp {
+  font-family: var(--goa-font-family-number);
+}
+
+/* Convenience utility: tabular numbers */
+.goa-number {
+  font: var(--goa-typography-number-m);
+  font-variant-numeric: tabular-nums;
+}

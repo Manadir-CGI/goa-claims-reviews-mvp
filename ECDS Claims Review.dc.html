@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta name="design_doc_mode" content="canvas">
+  <link rel="stylesheet" href="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/tokens/goa-tokens.css">
+  <link rel="stylesheet" href="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/tokens/base.css">
+  <link rel="stylesheet" href="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/styles.css">
+  <link rel="stylesheet" href="cr/fig-tokens.css">
+  <script src="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/_ds_bundle.js"></script>
+  <script src="cr-extra/Components.bundle.js"></script>
+  <script src="cr/Components.bundle.js"></script>
+  <script src="./goa-tooltip.js"></script>
+  <script src="./ionicons-offline.js"></script>
+  <script src="./goa-illustrations.js"></script>
+  <script src="./preload-modules.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; background: #eceef1; }
+    body { font-family: var(--goa-font-family-sans, "acumin-variable", Archivo, sans-serif); }
+    a { color: #006dcc; }
+    a:hover { color: #045092; }
+    .frame { background: #fff; border-radius: 12px; box-shadow: 0 16px 44px -18px rgba(0,0,0,0.35); border: 1px solid #d4d8dd; overflow: hidden; }
+    .frame-bar { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: #1e252e; color: #fff; }
+    .frame-badge { font-family: var(--goa-font-family-mono, "Roboto Mono", monospace); font-size: 13px; font-weight: 700; background: #0081a2; color: #fff; border-radius: 6px; padding: 2px 9px; }
+    .frame-name { font-size: 15px; font-weight: 700; }
+    .frame-aud { font-size: 12px; color: #aab3bd; }
+    .phase { display: flex; align-items: center; gap: 12px; }
+    .phase-num { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 12px; background: #1e252e; color: #7cc7ff; font-size: 20px; flex-shrink: 0; }
+    .phase-title { font-size: 22px; font-weight: 700; color: #1e252e; }
+    .phase-sub { font-size: 14px; color: #5a636d; max-width: 1000px; }
+    .note { box-sizing: border-box; background: #fff7e6; border: 1px solid #f0d9a0; border-left: 6px solid #e0a400; border-radius: 12px; padding: 18px 22px; }
+    .note-tag { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #8a5a00; margin-bottom: 8px; }
+    .note h4 { font-size: 19px; font-weight: 700; margin: 0 0 8px; color: #1e252e; }
+    .note ul { margin: 0; padding-left: 20px; }
+    .note li { font-size: 15px; line-height: 1.55; color: #3a444f; margin-bottom: 6px; }
+    .note li:last-child { margin-bottom: 0; }
+    .note b { color: #1e252e; }
+    .xref { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 13.5px; font-weight: 700; color: #5b4a9e; background: #efe8fb; border: 1px solid #d8cdf2; border-radius: 999px; padding: 4px 12px; }
+    .built { display: inline-flex; align-items: flex-start; gap: 7px; margin-top: 10px; font-size: 13px; font-weight: 600; color: #005a3c; background: #e4f1ea; border: 1px solid #bfe0cc; border-radius: 10px; padding: 8px 12px; line-height: 1.45; }
+    .built ion-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; color: #006f4c; }
+    .opt { display: flex; flex-direction: column; gap: 10px; width: max-content; }
+    .opt-head { display: flex; align-items: center; gap: 10px; }
+    .opt-badge { font-family: var(--goa-font-family-mono, "Roboto Mono", monospace); font-size: 13px; font-weight: 700; background: #5b4a9e; color: #fff; border-radius: 7px; padding: 2px 10px; }
+    .opt-name { font-size: 16px; font-weight: 700; color: #1e252e; }
+    .opt-hyp { font-size: 13px; color: #5a636d; }
+    .note-sm { box-sizing: border-box; background: #fff7e6; border: 1px solid #f0d9a0; border-left: 5px solid #e0a400; border-radius: 10px; padding: 12px 16px; }
+    .note-sm ul { margin: 0; padding-left: 18px; }
+    .note-sm li { font-size: 13.5px; line-height: 1.5; color: #3a444f; margin-bottom: 4px; }
+    .note-sm li:last-child { margin-bottom: 0; }
+    .note-sm b { color: #1e252e; }
+    .wired { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: #005a3c; background: #e4f1ea; border: 1px solid #bfe0cc; border-radius: 999px; padding: 3px 11px; }
+    .frame .goab-wsm__heading { white-space: normal; overflow: visible; text-overflow: clip; }
+    .frame .goab-wsm__header { height: auto; min-height: 32px; }
+    /* The DS clips the queue table itself (overflow-x:hidden), so an ancestor scroller never
+       engages and the Actions column is unreachable. Put the scroller on the table. */
+    .frame .goab-table { overflow-x: auto; }
+    /* 12 columns of default DS cell padding overflowed the 1179px shell card by 149px, pushing the
+       row's View/Open actions off screen. Tighten the gutters so Actions sits in view at rest. */
+    .frame .goab-table th, .frame .goab-table td { padding-left: 6px; padding-right: 6px; }
+    .frame .goab-table th:first-child, .frame .goab-table td:first-child { padding-left: 10px; }
+    .frame .goab-table th:last-child, .frame .goab-table td:last-child { padding-right: 10px; }
+    /* .goab-modal caps height with 100vh, which resolves against the real browser viewport rather
+       than the 1080px frame — the child-list modal collapsed to ~380px. Bound it to the frame. */
+    .frame .goab-modal { max-height: 900px; }
+    /* The modal renders inside the workspace card, so its z-index is scoped to that card's
+       stacking context and the side menu / page header painted over the scrim — the background
+       stayed reachable. Lift the card while a modal is open and raise the scrim above the chrome. */
+    .frame .goab-wl__main:has(.goab-modal__root),
+    .frame .goab-wl__card:has(.goab-modal__root) { position: relative; z-index: 400; }
+    .frame .goab-wl:has(.goab-modal__root) .goab-wl__sidemenu,
+    .frame .goab-wl:has(.goab-modal__root) .goab-wl__header,
+    .frame .goab-wl:has(.goab-modal__root) .goab-wl__footer { z-index: 1; }
+    .frame .goab-modal__root, .frame .goab-drawer { z-index: 99999; }
+    /* Tab panels sat on a much bigger gap than the rest of the page — normalise. */
+    .frame .goab-tabs__panel { padding-top: 8px; }
+    /* GoabCallout writes its 24px bottom margin INLINE, so a stylesheet rule can't win — the
+       callouts in the stack pass mb="none" instead and the 8px group gap governs. */
+    .frame .goab-tabs__list { margin-bottom: 0; }
+    /* Active header CTA: tertiary button sitting on a solid status fill, so its label and icon
+       have to invert to white. */
+    .frame [data-cta-on] .goab-button,
+    .frame [data-cta-on] button { color: var(--goa-color-greyscale-white); }
+    .frame [data-cta-on] ion-icon,
+    .frame [data-cta-on] .goab-icon { color: var(--goa-color-greyscale-white); fill: var(--goa-color-greyscale-white); }
+
+    /* GoabDropdown's control is a <button> whose CSS never resets `border`, so the browser's
+       default 2px outset border sat on top of the DS's own 1px inset border — dropdowns read
+       visibly heavier than GoabInput. Element+class beats the DS rule regardless of load order. */
+    button.goab-dropdown__control { border: 0; }
+    /* Scroll jitter: two nested scrollers. The workspace card scrolls 998px inside a frame that
+       itself sits in the scrolling document, and its overscroll-behavior-y is `auto` — so one wheel
+       gesture drives the card, hits its edge, hands off to the document, then hands back on
+       reverse. That start/stop hand-off is the jitter. Contain it to the card. */
+    .frame .goab-wl__card { overscroll-behavior-y: contain; }
+
+  </style>
+</helmet>
+
+
+<template id="__bundler_thumbnail" data-bg-color="#1e252e">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#1e252e"/>
+    <rect x="360" y="250" width="480" height="70" rx="10" fill="#00b6ed"/>
+    <rect x="360" y="360" width="300" height="40" rx="8" fill="#4a5560"/>
+    <rect x="360" y="430" width="180" height="120" rx="12" fill="#0081a2"/>
+    <rect x="560" y="430" width="180" height="120" rx="12" fill="#5b4a9e"/>
+  </svg>
+</template>
+
+<section style="padding: 48px; display: flex; flex-direction: column; gap: 30px; width: max-content;">
+  <header style="max-width: 1100px; display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <img src="goa-logo.svg" alt="Government of Alberta" style="height: 32px;" />
+      <span style="font: var(--goa-typography-body-s); color: #5a636d; border-left: 1px solid #c3ccd6; padding-left: 14px;">Protected A · Discovery · QA review</span>
+    </div>
+    <h1 style="font: var(--goa-typography-heading-2xl); margin: 0; letter-spacing: -0.02em;">Pattern Analyzer &times; QA review</h1>
+    <p style="font: var(--goa-typography-body-l); color: #3a444f; margin: 0;">The consolidated review gate — frame <a href="#s14">14</a>, fully interactive: filter, clear, open a claim, release, then switch <b>role</b> in Tweaks (QA → Subsidy EO → FDH EO → Funding EO → Finance Officer) to watch each batch move QA → specialist → Finance → 1GX. Frame <a href="#s16">16</a> is the predictive <b>Advance Intelligence</b> view. Part of the <a href="Claims Advance Vision Mockups.dc.html">claims-advance vision board</a>.</p>
+  </header>
+
+  <div style="display: flex; flex-direction: column; gap: 16px;" id="s14-wrap">
+    <div id="s14" class="frame" data-screen-label="14 QA review — live prototype" style="width: 1560px;">
+      <div class="frame-bar"><span class="frame-badge">14</span><span class="frame-name">QA Review &times; Pattern Analyzer</span><span class="frame-aud">Live prototype · Figma queue + &Delta; upgrades · switch role in Tweaks</span></div>
+      <div style="position: relative; width: 1560px; height: 1080px; overflow: hidden; transform: translateZ(0);">
+        <x-import component-from-global-scope="Frame14" from="./ClaimsShell.jsx" role="{{ role }}" grouping="{{ grouping }}" pa-placement="{{ paPlacement }}" evidence-mode="{{ evidenceMode }}" evidence-layout="{{ evidenceLayout }}" row-evidence="expand" detail-charts="on" kpi-style="full" show-review-features="false" role-subtitle="{{ roleSubtitle }}" role-name="{{ roleName }}" role-email="{{ roleEmail }}" hint-size="1560,1080"></x-import>
+      </div>
+    </div>
+    <div class="note" style="max-width: 1560px;"><div class="note-tag"><ion-icon name="bulb-outline"></ion-icon>Design rationale</div><h4>The Figma QA queue, kept — with eight annotated upgrades (&Delta; pins)</h4><ul><li><b>Unchanged from CCFOPS-375 (Figma):</b> the exact table anatomy — Reviewed · Received · Program name · Program ID · Claim ID · Flag(s) · Amount · Actions — plus the findability band, zebra rows and KPI tiles; the left nav follows the Figma Navigation-Internal (Claims &rarr; Claims reviews). Carla retrains on nothing.</li><li><b>&Delta;1 Exception grouping:</b> band rows sort the <i>same table</i> into violations &rarr; high risk &rarr; moderate &rarr; normal (guide &sect;3 priority). She scans 4 bands, not 107 rows — evidence: ~&frac34; of the file is bulk-cleared by hand today.</li><li><b>&Delta;2 Two analyzer columns</b> (violation count · model risk) merged into the queue — the standalone AltML dashboard retires ("I just want stuff in one place").</li><li><b>&Delta;3 The analyzer's filters get their own side sheet:</b> a dedicated <b>Pattern analyzer</b> button beside Filter opens a sheet with the tool's exact set — Program ID · Claim Period · Review Status · Top Model Feature · Transaction Status · Rule Violations (11-rule multi-select, real GoabDropdownMultiselect) · Claim Creation Date. Counts update live; Cancel restores, Apply commits.</li><li><b>&Delta;4 Batch actions in the toolbar + band-row bulk clear:</b> selection actions sit in the table toolbar (Carbon pattern), and the "perfect cases" checklist is one signed Clear 47 on the green band — the score never auto-rejects (guide &sect;3).</li><li><b>&Delta;5 Row-expand evidence:</b> score, top-3 features and plain-language violations inline — the "reason for the flag" the JIRA stories ask for, without leaving the queue.</li><li><b>&Delta;6 Watch flags resurface on schedule</b> (3/6/9 mo; 4 due) — replaces side trackers (discovery 07-30).</li><li><b>&Delta;8 Role-scoped tabs; payment types as quick filters:</b> the tab bar carries the signed-in role's workflow states (HQ QA: QA queue · Flagged · Hold · Watchlist · Released; Subsidy EO sees their stage queue; leads see both) — Flagged is a saved analyzer lens on the same table, not a second tool. Queue filters live behind ONE Filter button opening the Figma search side sheet verbatim (node 8286-139560: Status · Funding type · Received date range with quick picks · Amount range · Claim type · Clear all / Cancel / Apply) — the toolbar stays clean: search · Filter · Pattern analyzer · Export. KPI tiles are colour-coded by severity (red violations · amber risk · green cleared · purple awaiting/re-checks).</li><li><b>&Delta;7 Visible release</b> in a slim utility bar with a confirmation step — ends the Teams-email handoff; stage handoff lives here, not in the nav (stages are roles, not destinations).</li></ul><div style="display: flex; gap: 8px; flex-wrap: wrap;"><span class="xref"><ion-icon name="git-branch-outline"></ion-icon>Evolves 5B on the vision board</span><span class="xref"><ion-icon name="git-branch-outline"></ion-icon>Absorbs 14A</span></div><span class="built"><ion-icon name="cube-outline"></ion-icon><span><b>Build-ready, real components only:</b> GoabTable, GoabTabs, GoabDropdown + GoabDropdownMultiselect, GoabInput, GoabCheckbox, GoabBadge, GoabCallout, GoabButton (all compact) + <b>CL KPIs</b> and <b>goa-Selection-Chip</b> from Claims Review.fig. Shell from the GoA Workspace template.</span></span></div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 16px;" id="s16-wrap">
+    <div id="s16" class="frame" data-screen-label="16 Advance intelligence" style="width: 1560px;">
+      <div class="frame-bar"><span class="frame-badge">16</span><span class="frame-name">Advance Intelligence</span><span class="frame-aud">Predictive · portfolio advance-vs-actual reconciliation · exposure ranking · forecast</span></div>
+      <div style="position: relative; width: 1560px; height: 1080px; overflow: hidden; transform: translateZ(0);">
+        <x-import component-from-global-scope="Frame16" from="./ClaimsShell.jsx" hint-size="1560,1080"></x-import>
+      </div>
+    </div>
+    <div class="note" style="max-width: 1560px;"><div class="note-tag"><ion-icon name="bulb-outline"></ion-icon>Design rationale</div><h4>Advance Intelligence — a predictive view, not another queue</h4><ul><li><b>Why it exists:</b> the QA queue answers “which claim do I review next?”. This answers a portfolio question the reviewers can’t see today — <b>where is the advance out-running the actual claim, and what will next period need?</b> Ease-of-review lever #1 (data-viz &amp; insights) and #7 (Pattern Analyzer integration).</li><li><b>Advance-vs-actual reconciliation</b> (12-month lines + recovery-gap band) and a <b>recovery-rate</b> bar chart against a 98% target — both interactive (hover readout + series toggle), per the chart-fidelity rule. Grounds the split-payment / advance-recovery vision (discovery §6).</li><li><b>Provider exposure table</b> ranks by projected balance, worst-first, and expands to the recovery math + the model’s top driver + a right-sizing recommendation — surfacing the “Negative balance” risk <i>before</i> payment (guardrail: surface data-integrity / advance issues early). Modular per vehicle (badge + routing from a map).</li><li><b>Next-period forecast callout</b> quantifies the projected shortfall and how much right-sizing the flagged advances recovers — decision support, never an auto-reject.</li><li>Numbers illustrative (G5). Real GoA components + semantic tokens throughout; the $1.4M exposure echoes the board’s FDH-scale figures as rationale only.</li></ul><span class="xref"><ion-icon name="bulb-outline"></ion-icon>Levers #1 &amp; #7 · discovery §6 · guardrail: surface issues early</span> <span class="wired"><ion-icon name="checkmark-circle"></ion-icon>Interactive · hover · series toggle · expandable rows</span></div>
+  </div>
+
+  </section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;paPlacement&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;toolbar&quot;,&quot;options&quot;:[&quot;tab&quot;,&quot;toolbar&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Information architecture&quot;,&quot;description&quot;:&quot;Pattern analyzer entry: its own tab right of QA queue (replaces Flagged) vs a toolbar button opening a side sheet&quot;},&quot;role&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;hq-qa&quot;,&quot;options&quot;:[&quot;hq-qa&quot;,&quot;subsidy-eo&quot;,&quot;fdh-eo&quot;,&quot;funding-eo&quot;,&quot;finance-officer&quot;,&quot;lead&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Role &amp; access&quot;,&quot;description&quot;:&quot;Signed-in role for frame 14 — scopes tabs and queue (QA → Subsidy/FDH/Funding EO → Finance Officer → 1GX), bulk clear and release rights&quot;},&quot;grouping&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;bands&quot;,&quot;options&quot;:[&quot;bands&quot;,&quot;flat&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Information architecture&quot;,&quot;description&quot;:&quot;Frame 14: exception-first band grouping vs flat evidence-sorted queue&quot;},&quot;evidenceLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;focus&quot;,&quot;options&quot;:[&quot;calm&quot;,&quot;focus&quot;,&quot;quiet&quot;,&quot;ledger&quot;,&quot;banner&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Information architecture&quot;,&quot;description&quot;:&quot;Expanded-row density. calm = one verdict line + full-width violations + action row · focus = violations lead, score is a footnote with drivers behind a disclosure · quiet = two columns, no tints/bars/eyebrows · ledger/banner = original denser treatments&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const role = this.props.role ?? "hq-qa";
+    const IDENT = {
+      "hq-qa": ["Avery Solano", "avery.solano@gov.ab.ca", "HQ QA reviewer · June 2026 · first-line review · 107 received"],
+      "subsidy-eo": ["Owen Castle", "owen.castle@gov.ab.ca", "Subsidy EO · June 2026 · subsidy stream"],
+      "fdh-eo": ["Bea Fenwick", "bea.fenwick@gov.ab.ca", "Family Day Home EO · June 2026 · FDH stream"],
+      "funding-eo": ["Nina Harlow", "nina.harlow@gov.ab.ca", "Funding EO · June 2026 · ICC · Affordability · WTU"],
+      "finance-officer": ["Theo Marsh", "theo.marsh@gov.ab.ca", "Finance Officer · June 2026 · final release to 1GX"],
+      "lead": ["Lena Ashgrove", "lena.ashgrove@gov.ab.ca", "Program lead · June 2026 · all stages"],
+    };
+    const id = IDENT[role] || IDENT["hq-qa"];
+    return {
+      role,
+      grouping: this.props.grouping ?? "bands",
+      paPlacement: this.props.paPlacement ?? "tab",
+      evidenceMode: this.props.evidenceMode ?? "expand",
+      evidenceLayout: this.props.evidenceLayout ?? "ledger",
+      roleName: id[0], roleEmail: id[1], roleSubtitle: id[2],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+/* ============================================================
+   Government of Alberta — Web fonts
+   ------------------------------------------------------------
+   Primary UI typeface: Acumin (Adobe Typekit). The GoA system
+   ships Acumin Variable for body/headings and Roboto Mono for
+   numeric/monospace data.
+
+   NOTE: Acumin is an Adobe Fonts (Typekit) family and is served
+   from use.typekit.net. Those URLs are kit-bound and may not
+   resolve outside an authenticated kit. As a robust fallback we
+   load "Archivo" from Google Fonts — the closest free humanist
+   grotesque to Acumin — and place it in the font stack right
+   after acumin-variable. Swap in the licensed Acumin kit for
+   production fidelity.
+   ============================================================ */
+
+/* ┌──────────────────────────────────────────────────────────────┐
+   │  DROP IN YOUR ACUMIN KIT HERE — pick ONE of the two options.   │
+   ├──────────────────────────────────────────────────────────────┤
+   │  OPTION A · Adobe Fonts (Typekit) kit                          │
+   │  1. In Adobe Fonts, create/open a Web Project containing       │
+   │     "Acumin Variable Concept" (+ Acumin Pro SemiCondensed).    │
+   │  2. Copy its Project ID (e.g. abc1xyz) and uncomment:          │
+   │                                                                │
+   │     @import url("https://use.typekit.net/abc1xyz.css");        │
+   │                                                                │
+   │     That kit defines the `acumin-variable` /                   │
+   │     `acumin-pro-semi-condensed` families used below, and they  │
+   │     take precedence automatically. Done.                       │
+   │                                                                │
+   │  OPTION B · Self-hosted font files                             │
+   │  1. Drop the .woff2 files into  assets/fonts/  (Import menu).   │
+   │  2. Replace the `src:` URLs in the @font-face blocks below     │
+   │     with  url("../assets/fonts/AcuminVariable.woff2").         │
+   │                                                                │
+   │  Until then, Archivo (loaded below) renders as the fallback.   │
+   └──────────────────────────────────────────────────────────────┘ */
+
+/* ▼▼ Paste your Typekit kit @import on the next line (Option A) ▼▼ */
+/* @import url("https://use.typekit.net/XXXXXXX.css"); */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:wght@400;500;700&display=swap");
+
+/* ---- Acumin Variable (body + headings) ---- */
+@font-face {
+  font-family: "acumin-variable";
+  src: url("https://use.typekit.net/af/80814c/0000000000000000774be2a6/31/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff2"),
+    url("https://use.typekit.net/af/80814c/0000000000000000774be2a6/31/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("woff"),
+    url("https://use.typekit.net/af/80814c/0000000000000000774be2a6/31/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: normal;
+}
+
+/* ---- Acumin Pro Semi Condensed (legacy weights) ---- */
+@font-face {
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/l?subset_id=1&fvd=n4&v=3") format("woff2"),
+    url("https://use.typekit.net/af/3f7b4d/00000000000000003b9acb2d/27/d?subset_id=1&fvd=n4&v=3") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/l?subset_id=1&fvd=n6&v=3") format("woff2"),
+    url("https://use.typekit.net/af/e60e87/00000000000000003b9acb31/27/d?subset_id=1&fvd=n6&v=3") format("woff");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "acumin-pro-semi-condensed";
+  src: url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/l?subset_id=1&fvd=n7&v=3") format("woff2"),
+    url("https://use.typekit.net/af/ee7f3d/00000000000000003b9acb33/27/d?subset_id=1&fvd=n7&v=3") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* ---- Roboto Mono (numeric / monospace) ---- */
+@font-face {
+  font-family: "roboto-mono";
+  src: url("https://fonts.gstatic.com/s/robotomono/v22/L0xuDF4xlVMF-BfR8bXMIhJHg45mwgGEFl0_3vq_ROW4.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* Fallback hardening: keep Acumin primary, Archivo as the nearest
+   free substitute ahead of the system sans stack. */
+:root {
+  --goa-font-family-sans: acumin-variable, "Archivo", "Helvetica Neue", arial, sans-serif;
+  --goa-font-family-number: "roboto-mono", "Roboto Mono", ui-monospace, monospace;
+}

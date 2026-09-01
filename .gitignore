@@ -1,11 +1,6 @@
-node_modules/
-dist/
-*.local
-.DS_Store
-.vite/
-
-# Claude Code local permission state
-.claude/settings.local.json
-
-# Dev-only fidelity harness (design exports, not part of the app)
-public/_dev/
+# Working material from the design project that is deliberately not published:
+# internal process documents, discovery material and workshop scans.
+uploads/
+scraps/
+repo/
+figma-source/

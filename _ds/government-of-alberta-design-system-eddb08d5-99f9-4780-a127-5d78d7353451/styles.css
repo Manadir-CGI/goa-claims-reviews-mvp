@@ -1,0 +1,14 @@
+/* ============================================================
+   Government of Alberta Design System — global entry point
+   Consumers link THIS file. It is import-only by contract.
+   ============================================================ */
+
+@import "./tokens/fonts.css";
+@import "./tokens/goa-tokens.css";
+@import "./tokens/goa-dark-theme.css"; /* upstream dark theme, verbatim — activates via <html data-theme="dark"> */
+@import "./tokens/base.css";
+
+/* Illustration library colour tokens (Figma import) — curated, un-prefixed
+   --color-* namespace, separate from the --goa-* system, consumed by
+   components/illustrations/*. (The raw fig_materialize fig-tokens.css is not imported.) */
+@import "./tokens/illustration-tokens.css";
