@@ -1,10 +1,9 @@
-# Working material from the design project that is deliberately not published:
-# internal process documents, discovery material and workshop scans.
+node_modules/
+
+# Compiled from src/ by build.mjs
+js/
+
+# Guard: design exports also carry internal documents. This repo is public,
+# so never let a stray extraction into the working tree be committed.
 uploads/
 scraps/
-repo/
-figma-source/
-
-# Compiled from the .jsx sources by build.mjs
-js/
-node_modules/

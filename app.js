@@ -1,12 +1,4 @@
-/*
- * Mounts the Claims reviews screen as a standalone application.
- *
- * Frame14 is the composition the design document mounts: ClaimsShell (the GoA
- * workspace layout and side menu) wrapping QAPrototypeScreen. The props below
- * are the design's own defaults, taken from the document's `data-props` block
- * and the fallbacks in its renderVals(); role "hq-qa" resolves to this reviewer
- * identity in the document's IDENT table.
- */
+/* Mounts the Claims reviews screen. */
 (function () {
   var PROPS = {
     role: 'hq-qa',
