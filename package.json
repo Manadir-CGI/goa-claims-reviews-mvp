@@ -1,0 +1,26 @@
+{
+  "name": "goa-claims-reviews-mvp",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "HQ QA work queue - Claims reviews (MVP V1), built on the Government of Alberta Design System v2",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@abgov/design-tokens": "^2.9.0",
+    "@abgov/react-components": "^7.3.0",
+    "@abgov/web-components": "^2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^5.2.0",
+    "typescript": "^5.6.3",
+    "vite": "^7.3.6"
+  }
+}

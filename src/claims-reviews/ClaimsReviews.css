@@ -1,0 +1,119 @@
+/* Layout-only styles. Type, colour and spacing come from GoA design tokens;
+   the design system owns every component rendered on this screen. */
+
+.claims {
+  /* Numeric IDs and amounts are set in a monospace face in the design so the
+     columns align digit-for-digit when scanned. */
+  --claims-mono: ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Menlo, Consolas, monospace;
+
+  /* GoabWorkspaceLayout owns the card and its scroll container but leaves the
+     content gutters to the page. No top padding: the h1 carries the design
+     system's own heading margin. */
+  padding: 0 var(--goa-space-2xl) var(--goa-space-2xl);
+}
+
+/* Tabs on the left, search and actions on the right of the same row. */
+.claims-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--goa-space-m);
+  margin-bottom: var(--goa-space-l);
+}
+
+.claims-controls__tabs {
+  min-width: 0;
+}
+
+/* The segmented tabs render their (empty) panel region below the tab strip;
+   this screen renders its own table instead, so collapse the panel. */
+.claims-controls__tabs goa-tabs::part(panel),
+.claims-controls__tabs [role='tabpanel'] {
+  display: none;
+}
+
+.claims-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-s);
+}
+
+.claims-toolbar__search {
+  width: 260px;
+}
+
+/* ----------------------------------------------------------- selection bar */
+
+.claims-selection {
+  margin-bottom: var(--goa-space-l);
+}
+
+.claims-selection__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--goa-space-m);
+}
+
+.claims-selection__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--goa-space-m);
+}
+
+/* ------------------------------------------------------------------ table */
+
+.claims-table {
+  overflow-x: auto;
+}
+
+/* Checkbox and reviewed-marker columns hug their content. */
+.claims-cell--select,
+.claims-cell--marker {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.claims-cell--marker {
+  padding-inline: 0;
+  vertical-align: middle;
+}
+
+.claims-cell--nowrap {
+  white-space: nowrap;
+}
+
+.claims-cell--mono {
+  font-family: var(--claims-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Negative adjustments read as credits. */
+.claims-cell--credit {
+  color: var(--goa-color-emergency-text);
+  font-weight: var(--goa-font-weight-bold, 700);
+}
+
+.claims-cell--empty {
+  color: var(--goa-color-text-secondary);
+}
+
+/* Program name over its service address. */
+.claims-program {
+  display: flex;
+  flex-direction: column;
+  gap: var(--goa-space-3xs);
+}
+
+.claims-program__name {
+  font-weight: var(--goa-font-weight-bold, 700);
+}
+
+.claims-program__address {
+  color: var(--goa-color-text-secondary);
+  font-size: var(--goa-font-size-2, 0.875rem);
+  white-space: nowrap;
+}

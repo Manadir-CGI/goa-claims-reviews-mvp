@@ -1,0 +1,12 @@
+/* Base typography, body font and colours come from
+   @abgov/web-components/index.css (imported in main.tsx). */
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
