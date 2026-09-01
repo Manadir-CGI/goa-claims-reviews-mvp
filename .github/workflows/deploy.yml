@@ -14,8 +14,6 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
-# The design project is static: the .dc.html documents load their own runtime,
-# design-system bundle and JSX modules by relative path. Nothing to build.
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,6 +22,20 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install build tooling
+        run: npm ci
+
+      # Transforms the design project's JSX modules into js/. Everything else
+      # is served as-is, so the repository root is what gets published.
+      - name: Compile screen modules
+        run: npm run build
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

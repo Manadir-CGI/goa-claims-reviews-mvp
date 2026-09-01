@@ -1,0 +1,13 @@
+{
+  "name": "goa-claims-reviews",
+  "private": true,
+  "version": "1.0.0",
+  "description": "HQ QA work queue - Claims reviews, running standalone from the Claude Design project source",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && python -m http.server 8000 --directory dist"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

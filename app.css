@@ -1,0 +1,20 @@
+/* The screen runs full-viewport. The canvas document framed it inside a mock
+   browser window on a grey board; a real application has no such chrome. */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--goa-font-family-sans);
+  background: var(--goa-color-greyscale-white, #fff);
+  color: var(--goa-color-text-default, #333);
+}
+
+#app-loading {
+  padding: var(--goa-space-xl, 32px);
+  font-family: var(--goa-font-family-sans);
+  color: var(--goa-color-text-secondary, #6f6f6f);
+}

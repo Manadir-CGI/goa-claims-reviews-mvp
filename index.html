@@ -2,17 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Claims review mockups</title>
-    <meta http-equiv="refresh" content="0; url=./MVP%20V1.dc.html" />
-    <link rel="canonical" href="./MVP%20V1.dc.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Claims reviews — HQ QA work queue</title>
+    <link rel="icon" href="goa-logo.svg" />
+
+    <!-- Government of Alberta Design System 2.0, exactly as the design project ships it. -->
+    <link rel="stylesheet" href="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/tokens/fonts.css" />
+    <link rel="stylesheet" href="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/tokens/goa-tokens.css" />
+    <link rel="stylesheet" href="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/tokens/base.css" />
+    <link rel="stylesheet" href="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/styles.css" />
+    <link rel="stylesheet" href="cr/fig-tokens.css" />
+    <link rel="stylesheet" href="app.css" />
   </head>
   <body>
-    <p>Opening <a href="./MVP%20V1.dc.html">MVP V1 &mdash; HQ QA work queue</a>&hellip;</p>
-    <ul>
-      <li><a href="./MVP%20V1.dc.html">MVP V1 &mdash; HQ QA work queue</a></li>
-      <li><a href="./ECDS%20Claims%20Review.dc.html">ECDS Claims Review</a></li>
-      <li><a href="./Claims%20Advance%20Vision%20Mockups.dc.html">Claims Advance Vision Mockups</a></li>
-      <li><a href="./Claims%20Review%20-%20Real%20Components.dc.html">Claims Review &mdash; Real Components</a></li>
-    </ul>
+    <div id="root"><p id="app-loading">Loading Claims reviews…</p></div>
+
+    <!-- React 18.3.1, vendored so the app has no CDN dependency at runtime. -->
+    <script src="vendor/react.production.min.js"></script>
+    <script src="vendor/react-dom.production.min.js"></script>
+
+    <!-- Design system + component bundles. -->
+    <script src="_ds/government-of-alberta-design-system-eddb08d5-99f9-4780-a127-5d78d7353451/_ds_bundle.js"></script>
+    <script src="cr-extra/Components.bundle.js"></script>
+    <script src="cr/Components.bundle.js"></script>
+    <script src="goa-tooltip.js"></script>
+    <script src="ionicons-offline.js"></script>
+    <script src="goa-illustrations.js"></script>
+
+    <!-- The design's own screen modules, precompiled from JSX by build.mjs.
+         Loaded in dependency order, so every global is present before app.js. -->
+    <script src="js/LazyFrame.js"></script>
+    <script src="js/AdvanceIntelligence.js"></script>
+    <script src="js/QAPrototypeScreen.js"></script>
+    <script src="js/ClaimsShell.js"></script>
+
+    <script src="app.js"></script>
   </body>
 </html>

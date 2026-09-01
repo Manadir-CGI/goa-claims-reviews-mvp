@@ -4,3 +4,7 @@ uploads/
 scraps/
 repo/
 figma-source/
+
+# Compiled from the .jsx sources by build.mjs
+js/
+node_modules/
