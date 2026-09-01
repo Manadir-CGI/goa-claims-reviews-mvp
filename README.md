@@ -1,10 +1,6 @@
 # Claims review mockups
 
-The Claude Design project for the Government of Alberta **HQ QA work queue**,
-deployed as-is. No build step and no reimplementation: the `.dc.html` documents
-are served exactly as they were authored, and they load their own canvas
-runtime, Government of Alberta Design System 2.0 bundle, and JSX modules by
-relative path.
+The Claude Design project for the Government of Alberta **HQ QA work queue**.
 
 **Live: <https://manadir-cgi.github.io/goa-claims-reviews-mvp/>**
 
