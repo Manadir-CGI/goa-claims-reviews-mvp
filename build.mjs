@@ -15,10 +15,10 @@ import { build } from 'esbuild';
 import { mkdir } from 'node:fs/promises';
 
 const ENTRIES = [
-  'LazyFrame.jsx',
-  'AdvanceIntelligence.jsx',
-  'QAPrototypeScreen.jsx',
-  'ClaimsShell.jsx',
+  'src/LazyFrame.jsx',
+  'src/AdvanceIntelligence.jsx',
+  'src/QAPrototypeScreen.jsx',
+  'src/ClaimsShell.jsx',
 ];
 
 await mkdir('js', { recursive: true });

@@ -67,23 +67,31 @@ Design viewport is **1560×950**.
 ## Layout
 
 ```
-index.html                 the application
-app.js                     mounts Frame14 with the design's default props
-app.css                    full-viewport reset
-build.mjs                  JSX -> js/
-ClaimsShell.jsx            GoA workspace shell + Frame14/Frame16  ┐ design
-QAPrototypeScreen.jsx      the screen                             │ project
-AdvanceIntelligence.jsx, LazyFrame.jsx                            │ source,
-_ds/government-of-alberta-…/  GoA Design System 2.0 + tokens      │ unmodified
-cr/, cr-extra/             component bundles + Figma tokens       │
-goa-tooltip.js, goa-illustrations.js, ionicons-offline.js, goa-logo.svg ┘
-vendor/                    React 18.3.1 UMD
-*.dc.html                  original Claude Design canvas documents
+index.html            the application
+app.js                mounts Frame14 with the design's default props
+app.css               full-viewport reset
+build.mjs             JSX -> js/
+src/                  screen source, from the design project, unmodified
+  ClaimsShell.jsx       GoA workspace shell + Frame14 / Frame16
+  QAPrototypeScreen.jsx the screen
+  AdvanceIntelligence.jsx, LazyFrame.jsx
+_ds/government-of-…/  GoA Design System 2.0 bundle + tokens
+cr/, cr-extra/        component bundles + Figma tokens
+vendor/               React 18.3.1 UMD, tooltip, ionicons, illustrations, logo
+js/                   build output (git-ignored)
 ```
 
-The original canvas documents are kept and still work — open
-[`MVP V1.dc.html`](MVP%20V1.dc.html) for the annotated design view alongside the
-running app.
+`_ds/`, `cr/` and `cr-extra/` are vendored byte-for-byte from the design project
+so they can be re-synced with a straight copy. `_ds/` stays at the repository
+root rather than under `vendor/` because its path is already at the Windows
+length limit (see below).
+
+The Claude Design canvas documents (`*.dc.html`) and their runtime were removed
+once the app replaced them. To read one again:
+
+```bash
+git show 933c351:"MVP V1.dc.html" > "MVP V1.dc.html"
+```
 
 Acumin (Typekit) and Roboto Mono (Google Fonts) are fetched at runtime by the
 design system's `tokens/fonts.css`, so the page needs internet for its
