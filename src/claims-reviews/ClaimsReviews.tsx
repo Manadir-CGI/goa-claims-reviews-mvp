@@ -7,9 +7,9 @@ import {
   GoabContainer,
   GoabIcon,
   GoabInput,
+  GoabDropdown,
+  GoabDropdownOption,
   GoabLink,
-  GoabMenuAction,
-  GoabMenuButton,
   GoabTab,
   GoabTable,
   GoabSpacer,
@@ -36,8 +36,8 @@ interface InputChangeDetail {
 interface TabsChangeDetail {
   tab: number;
 }
-interface MenuActionDetail {
-  action: string;
+interface DropdownChangeDetail {
+  value: string;
 }
 
 /* ---------------------------------------------------------------- tab model */
@@ -106,6 +106,7 @@ export default function ClaimsReviews() {
     direction: 'none',
   });
   const [query, setQuery] = useState('');
+  const [flagFilter, setFlagFilter] = useState('');
 
   /** Row selection, keyed by payment reference. */
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -145,6 +146,12 @@ export default function ClaimsReviews() {
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
     const filtered = rowsForTab(activeTab).filter((c) => {
+      const flagged = flagFilter && flagFilter !== 'all';
+      if (flagged) {
+        const matches =
+          flagFilter === 'Adjustment' ? c.type === 'Adjustment' : c.flag === flagFilter;
+        if (!matches) return false;
+      }
       if (!q) return true;
       return `${c.program} ${c.address} ${c.programId} ${c.paymentRef}`.toLowerCase().includes(q);
     });
@@ -164,7 +171,7 @@ export default function ClaimsReviews() {
           return a.receivedIso.localeCompare(b.receivedIso) * dir;
       }
     });
-  }, [activeTab, query, sort, held, watchlist]);
+  }, [activeTab, query, flagFilter, sort, held, watchlist]);
 
   /* The overview is a read-only roll-up; the working queues are selectable. */
   const selectable = activeTab !== 'overview';
@@ -260,6 +267,7 @@ export default function ClaimsReviews() {
         <GoabInput
           name="search"
           type="search"
+          size="compact"
           value={query}
           leadingIcon="search"
           placeholder="Search"
@@ -269,18 +277,32 @@ export default function ClaimsReviews() {
         />
       </div>
 
-      <GoabButton type="secondary" leadingIcon="filter-lines" onClick={() => undefined}>
-        Filter
-      </GoabButton>
-
-      <GoabMenuButton
-        type="secondary"
-        text="Export"
-        onAction={(_detail: MenuActionDetail) => undefined}
+      <GoabDropdown
+        name="flag"
+        size="compact"
+        leadingIcon="filter-lines"
+        placeholder="Filter"
+        value={flagFilter}
+        ariaLabel="Filter claims"
+        onChange={(detail: DropdownChangeDetail) => setFlagFilter(detail.value)}
       >
-        <GoabMenuAction text="Export as CSV" action="csv" icon="document-text" />
-        <GoabMenuAction text="Export as Excel" action="xlsx" icon="grid" />
-      </GoabMenuButton>
+        <GoabDropdownOption value="all" label="All claims" />
+        <GoabDropdownOption value="High variance" label="High variance" />
+        <GoabDropdownOption value="Random sample" label="Random sample" />
+        <GoabDropdownOption value="Adjustment" label="Adjustments" />
+      </GoabDropdown>
+
+      <GoabDropdown
+        name="export"
+        size="compact"
+        placeholder="Export"
+        value=""
+        ariaLabel="Export claims"
+        onChange={() => undefined}
+      >
+        <GoabDropdownOption value="csv" label="Export as CSV" />
+        <GoabDropdownOption value="xlsx" label="Export as Excel" />
+      </GoabDropdown>
     </div>
   );
 
@@ -341,7 +363,7 @@ export default function ClaimsReviews() {
   );
 
   const table = (
-    <GoabTable width="100%" onSort={onSortHeader}>
+    <GoabTable onSort={onSortHeader}>
       <thead>
         <tr>
           {selectable && (
@@ -421,9 +443,9 @@ export default function ClaimsReviews() {
                   <span className="claims-program__address">{claim.address}</span>
                 </span>
               </td>
-              <td className="claims-cell--mono">{claim.programId}</td>
+              <td className="claims-cell--number">{claim.programId}</td>
               <td className="claims-cell--nowrap">{claim.claimPeriod}</td>
-              <td className="claims-cell--mono">{claim.paymentRef}</td>
+              <td className="claims-cell--number">{claim.paymentRef}</td>
               <td className="claims-cell--nowrap">{claim.type}</td>
               {selectable && (
                 <td>
@@ -450,7 +472,7 @@ export default function ClaimsReviews() {
                 ) : null}
               </td>
               <td
-                className={`goa-table-number-column claims-cell--mono${
+                className={`goa-table-number-column claims-cell--number${
                   claim.amount < 0 ? ' claims-cell--credit' : ''
                 }`}
               >
@@ -470,10 +492,9 @@ export default function ClaimsReviews() {
 
   return (
     <div className="claims">
-      {/* Native heading: the design system's foundation stylesheet maps its
-          typography tokens onto h1-h6, and GoabText's own heading margins are
-          not adjustable from outside its shadow root. */}
-      <h1 className="claims__title">Claims reviews</h1>
+      <GoabText tag="h1" size="heading-l">
+        Claims reviews
+      </GoabText>
 
       <div className="claims-controls">
         <div className="claims-controls__tabs">
