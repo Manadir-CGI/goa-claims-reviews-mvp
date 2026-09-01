@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useLayoutEffect, type ReactNode } from 'react';
 import {
   GoabWorkSideMenu,
   GoabWorkSideMenuGroup,
@@ -19,6 +19,30 @@ interface ClaimsShellProps {
  * collapse toggle and account affordance shown on the rail.
  */
 export default function ClaimsShell({ children }: ClaimsShellProps) {
+  /*
+   * The design shows the rail collapsed to icons. The `open` prop cannot express
+   * that on its own: `open` is a boolean attribute, so React omits it rather than
+   * writing open="false", and goa-work-side-menu then falls back to its own
+   * default — which is expanded at wide viewports. Setting the element property
+   * is what actually holds it closed, so do that as soon as the custom element is
+   * defined. The rail stays user-toggleable afterwards.
+   */
+  useLayoutEffect(() => {
+    let cancelled = false;
+    const collapse = () => {
+      if (cancelled) return;
+      const el = document.querySelector('goa-work-side-menu') as
+        | (HTMLElement & { open?: boolean })
+        | null;
+      if (el) el.open = false;
+    };
+    collapse();
+    void customElements.whenDefined('goa-work-side-menu').then(collapse);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <GoabWorkspaceLayout
       sideMenu={

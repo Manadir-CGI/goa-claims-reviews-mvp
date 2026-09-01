@@ -470,9 +470,10 @@ export default function ClaimsReviews() {
 
   return (
     <div className="claims">
-      <GoabText tag="h1" size="heading-xl">
-        Claims reviews
-      </GoabText>
+      {/* Native heading: the design system's foundation stylesheet maps its
+          typography tokens onto h1-h6, and GoabText's own heading margins are
+          not adjustable from outside its shadow root. */}
+      <h1 className="claims__title">Claims reviews</h1>
 
       <div className="claims-controls">
         <div className="claims-controls__tabs">

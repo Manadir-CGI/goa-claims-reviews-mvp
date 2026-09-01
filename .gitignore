@@ -6,3 +6,6 @@ dist/
 
 # Claude Code local permission state
 .claude/settings.local.json
+
+# Dev-only fidelity harness (design exports, not part of the app)
+public/_dev/

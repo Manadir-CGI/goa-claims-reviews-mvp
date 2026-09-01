@@ -97,27 +97,52 @@ claim or payment.
 populates the first page of that queue rather than all 68 rows, so the badge
 reads from that constant while the table renders the fixture.
 
-## Known deviations from the design export
+## Fidelity against the design export
 
-The source design was drawn with a Figma-derived component bundle, not with
-`@abgov/react-components`, so its metrics and some of its styling do not match
-the real design system. Where the two disagree, this build uses the real
-design-system component:
+The build was measured against the artboard rather than eyeballed. The export is
+3120x1900 at 2x, i.e. a **1560x950** artboard, which the design system's own 72px
+work-side-menu rail confirms (the artboard's card starts at 74px).
 
-- **Toolbar buttons.** The design shows `Filter` and `Export` with a neutral grey
-  border and `#333` text. GoA DS v2 has no neutral-bordered button — the `dark`
-  variant is only styled for `type="text"`, and the component logs a warning if
-  you ask for it on `secondary`. These render as the real `secondary` button
-  (blue border, blue text). Matching the design exactly would mean overriding DS
-  colour tokens.
-- **Row height and tab-strip width.** The design's row pitch and tab metrics do
-  not correspond to DS defaults at any single scale factor. DS defaults are used.
-- **Heading typeface.** The DS specifies `acumin-pro-semi-condensed`, a licensed
-  font that is not bundled, so headings fall back down the DS font stack.
+Verified equal, or within a few pixels, on all four states:
+
+| Measure | Artboard | Build |
+| --- | --- | --- |
+| Content gutter inside the card | 32px | 32px |
+| Page title | 32px / 40px bold | 32px / 40px bold |
+| Controls row (tabs + toolbar) | y 80, 40px tall | y 81, 40px tall |
+| Search field | 221 x 40 | 221 x 40 |
+| Filter button | ~101px wide, neutral border, #333 text | 101px, neutral border, #333 text |
+| Table header band | 60px | 64px |
+| **Table row pitch** | **63px** | **63px** |
+| Rows visible at 950px tall | 11 | 11 |
+| Selection bar | y 139 rel. card, 58px tall | y 137, 64px tall |
+
+The design's type scale turned out to be the GoA scale one step below the library
+defaults — `body-s` (16/24) in the table and `body-xs` (14/20) for the service
+address — so most of this is token selection, not overriding. Density and the
+neutral toolbar buttons are driven through the design system's own custom
+properties (`--goa-button-padding`, `--goa-button-secondary-border`,
+`--goa-text-input-height`, `--goa-container-padding-compact`,
+`--goa-tabs-margin-bottom`, `--goa-table-padding-heading`) rather than by
+reaching into shadow DOM.
+
+### Remaining differences
+
+- **Segmented tab strip is 40px tall, the artboard draws 32px.** The library
+  floors each tab at `min-height: 30px` and adds 3px padding plus a 1px border;
+  there is no custom property for either, so closing the last 8px would mean
+  overriding shadow-DOM internals.
+- **Table cell padding is 12px against the artboard's ~14px.** At 14px the
+  widest tab (QA queue, 11 columns, every label on one line) needs 1440px of
+  min-content and overflows the 100%-width table, clipping the Actions column.
+- **Header band is 64px against 60px** — `th` carries a 56px `min-height` floor.
+- **Heading typeface.** The design system specifies `acumin-pro-semi-condensed`,
+  a licensed font that is not bundled, so headings fall back down its stack.
+  Glyph widths therefore differ slightly from the export.
 - **`Reviewed` state control.** The design shows a filled dark-green pill where
   `Mark reviewed` was. No GoA button variant is green, so this is a
-  `GoabBadge type="success"` — a real DS component with that exact appearance,
-  and semantically a state rather than an action.
+  `GoabBadge type="success"` — a real component with that exact appearance, and
+  semantically a state rather than an action.
 
 ## Design reference
 
