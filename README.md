@@ -8,6 +8,8 @@ The screen is a worker tool: HQ QA reviewers scan childcare claims that have bee
 pulled for review, work through the QA queue, mark claims reviewed, and release
 them back into the payment chain.
 
+**Live prototype: <https://manadir-cgi.github.io/goa-claims-reviews-mvp/>**
+
 ![Claims overview](docs/mvp-v1-claims-overview.png)
 
 ## Running it
@@ -27,6 +29,16 @@ at.
 ```bash
 npm run build
 ```
+
+## Deploying
+
+`.github/workflows/deploy.yml` builds the app and publishes `dist/` to GitHub
+Pages on every push to `main`, and can also be run on demand from the Actions
+tab. Pages is configured with **GitHub Actions** as its source (not a branch), so
+no `gh-pages` branch is involved.
+
+`base: './'` in `vite.config.ts` keeps asset URLs relative, which is what lets the
+build work from the `/goa-claims-reviews-mvp/` project path.
 
 ## What's implemented
 
